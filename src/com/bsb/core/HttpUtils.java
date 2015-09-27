@@ -31,6 +31,8 @@ public class HttpUtils {
 		//为url锟皆讹拷锟斤拷锟斤拷锟斤拷锟斤拷
 		url_path = URLHEADER+url_path;
 		
+		Log.i("my", url_path);
+		
 		try {
 			URL url = new URL(url_path);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();

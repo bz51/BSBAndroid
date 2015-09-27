@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
         
         //开启30分钟未抢单短信计时器
         Timer timer5 = new Timer();
-        timer5.scheduleAtFixedRate(new Query30MUnGrabMsgListThread(db), new Date(),30000);//当前时间开始起动 每次间隔30秒再启动
+        timer5.scheduleAtFixedRate(new Query30MUnGrabMsgListThread(db), new Date(),1800000);//当前时间开始起动 每次间隔30秒再启动
         
     }
 }
