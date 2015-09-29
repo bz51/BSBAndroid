@@ -8,9 +8,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.baidu.speechsynthesizer.SpeechSynthesizer;
 import com.bsb.MySpeechSynthesizerListener;
+import com.bsb.core.SMSTool;
 import com.bsb.entity.MsgEntity;
 
 /**
@@ -21,16 +24,28 @@ import com.bsb.entity.MsgEntity;
 public class SendMsgThread extends TimerTask {
 	private SQLiteDatabase db;
 	private Context context;
+	private ArrayAdapter adapter;
 	
-	public SendMsgThread(SQLiteDatabase db,Context context) {
+	
+
+
+	public SendMsgThread(SQLiteDatabase db, Context context,
+			ArrayAdapter adapter) {
+		super();
 		this.db = db;
 		this.context = context;
+		this.adapter = adapter;
 	}
-	
+
+
+
+
 	@Override
 	public void run() {
 
         Log.i("my", "发送短信线程已启动");
+//        adapter.add("发送短信线程已启动……");
+//		adapter.notifyDataSetChanged();
 		
 		//从sqlite中读出所有未发送短信
 		Cursor c = db.rawQuery("select * from msg where state=?",new String[]{"0"});
@@ -51,6 +66,8 @@ public class SendMsgThread extends TimerTask {
 		//逐条发送，发完一条就立即更新数据库，将该条标注为已发送
 		for(MsgEntity e : list){
 			//发送短信
+			sendSMS(e.getPhone(),e.getContent());
+			
 			Log.i("my", "已发送："+e.getPhone()+":"+e.getContent());
 			// 注：第二个参数当前请传入任意非空字符串即可
 			SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer(context, "holder", new MySpeechSynthesizerListener());
@@ -66,5 +83,20 @@ public class SendMsgThread extends TimerTask {
 		}
 		
 	}
+	
+	/** 
+     * 直接调用短信接口发短信 
+     * @param phoneNumber 
+     * @param message 
+     */  
+	public void sendSMS(String phoneNumber,String message){  
+        //获取短信管理器   
+        android.telephony.SmsManager smsManager = android.telephony.SmsManager.getDefault();  
+        //拆分短信内容（手机短信长度限制）    
+        List<String> divideContents = smsManager.divideMessage(message);   
+        for (String text : divideContents) {    
+            smsManager.sendTextMessage(phoneNumber, null, text, null, null);    
+        }  
+    }  
 
 }

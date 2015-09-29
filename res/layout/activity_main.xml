@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:text="@string/hello_world" 
-        android:id="@+id/authCodeInfoTextView"/>
+	<ListView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:id="@+id/listview"
+	    ></ListView>
     
     
 

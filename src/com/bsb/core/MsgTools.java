@@ -5,6 +5,8 @@ import java.util.List;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.bsb.entity.MsgEntity;
 
@@ -14,8 +16,10 @@ public class MsgTools {
 	 * 发送请求，获取json，转成MsgEntity，并存入DB
 	 * @param url
 	 */
-	public static void getMsgSaveDB(String url,SQLiteDatabase db){
+	public static void getMsgSaveDB(String url,SQLiteDatabase db, ArrayAdapter adapter){
 		Log.i("my", "线程"+url+"已启动……");
+//		adapter.add("线程"+url+"已启动……");
+//		adapter.notifyDataSetChanged();
 		
 		if(url==null || url.equals("") || db==null)
 			return;

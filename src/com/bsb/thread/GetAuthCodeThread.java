@@ -6,6 +6,8 @@ import java.util.TimerTask;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.bsb.core.HttpUtils;
 import com.bsb.core.JsonTools;
@@ -21,14 +23,19 @@ import com.bsb.entity.MsgEntity;
  */
 public class GetAuthCodeThread extends TimerTask{
 	private SQLiteDatabase db;
+	private ArrayAdapter adapter;
 	
-	public GetAuthCodeThread(SQLiteDatabase db) {
+
+	public GetAuthCodeThread(SQLiteDatabase db, ArrayAdapter adapter) {
+		super();
 		this.db = db;
+		this.adapter = adapter;
 	}
+
 
 	@Override
 	public void run() {
-		MsgTools.getMsgSaveDB(Parameters.getUnSendCodeList, db);
+		MsgTools.getMsgSaveDB(Parameters.getUnSendCodeList, db,adapter);
 	}
 
 }

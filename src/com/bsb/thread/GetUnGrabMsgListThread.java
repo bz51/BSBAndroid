@@ -12,6 +12,8 @@ import com.bsb.entity.MsgEntity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
  * 获取未抢单短信
@@ -20,14 +22,17 @@ import android.util.Log;
  */
 public class GetUnGrabMsgListThread extends TimerTask {
 	private SQLiteDatabase db;
+	private ArrayAdapter adapter;
 	
-	public GetUnGrabMsgListThread(SQLiteDatabase db) {
+	public GetUnGrabMsgListThread(SQLiteDatabase db, ArrayAdapter adapter) {
+		super();
 		this.db = db;
+		this.adapter = adapter;
 	}
-	
+
 	@Override
 	public void run() {
-		MsgTools.getMsgSaveDB(Parameters.getUnGrabMsgList, db);
+		MsgTools.getMsgSaveDB(Parameters.getUnGrabMsgList, db,adapter);
 	}
 
 }
