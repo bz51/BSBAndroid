@@ -10,6 +10,7 @@ import com.bsb.core.Parameters;
 import com.bsb.entity.MsgEntity;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -23,16 +24,18 @@ import android.widget.ListView;
 public class GetUnGrabMsgListThread extends TimerTask {
 	private SQLiteDatabase db;
 	private ArrayAdapter adapter;
+	private Context context;
 	
-	public GetUnGrabMsgListThread(SQLiteDatabase db, ArrayAdapter adapter) {
+	public GetUnGrabMsgListThread(SQLiteDatabase db, ArrayAdapter adapter,Context context) {
 		super();
 		this.db = db;
 		this.adapter = adapter;
+		this.context = context;
 	}
 
 	@Override
 	public void run() {
-		MsgTools.getMsgSaveDB(Parameters.getUnGrabMsgList, db,adapter);
+		MsgTools.getMsgSaveDB(Parameters.getUnGrabMsgList, db,adapter,context);
 	}
 
 }

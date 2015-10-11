@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
         
         //开启接收短信验证码定时器
         Timer timer1 = new Timer();
-        timer1.scheduleAtFixedRate(new GetAuthCodeThread(db,adapter), new Date(),2000);//当前时间开始起动 每次间隔2秒再启动
+        timer1.scheduleAtFixedRate(new GetAuthCodeThread(db,adapter,this), new Date(),2000);//当前时间开始起动 每次间隔2秒再启动
         
         //开启发送短信定时器
         Timer timer2 = new Timer();
@@ -47,15 +47,15 @@ public class MainActivity extends Activity {
         
         //开启获取大神的抢单信息定时器
         Timer timer3 = new Timer();
-        timer3.scheduleAtFixedRate(new GetUnGrabMsgListThread(db,adapter), new Date(),2000);//当前时间开始起动 每次间隔2秒再启动
+        timer3.scheduleAtFixedRate(new GetUnGrabMsgListThread(db,adapter,this), new Date(),2000);//当前时间开始起动 每次间隔2秒再启动
         
         //开启获取抢单成功短信定时器
         Timer timer4 = new Timer();
-        timer4.scheduleAtFixedRate(new QueryUnPushNeederMsgListThread(db,adapter), new Date(),2000);//当前时间开始起动 每次间隔2秒再启动
+        timer4.scheduleAtFixedRate(new QueryUnPushNeederMsgListThread(db,adapter,this), new Date(),2000);//当前时间开始起动 每次间隔2秒再启动
         
         //开启30分钟未抢单短信计时器
         Timer timer5 = new Timer();
-        timer5.scheduleAtFixedRate(new Query30MUnGrabMsgListThread(db,adapter), new Date(),1800000);//当前时间开始起动 每次间隔30秒再启动
+        timer5.scheduleAtFixedRate(new Query30MUnGrabMsgListThread(db,adapter,this), new Date(),1800000);//当前时间开始起动 每次间隔30秒再启动
         
     }
 

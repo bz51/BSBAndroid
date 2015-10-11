@@ -3,12 +3,15 @@ package com.bsb.core;
 import java.util.List;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.bsb.entity.MsgEntity;
+import com.bsb.thread.UpdateUITask;
 
 public class MsgTools {
 	
@@ -16,7 +19,7 @@ public class MsgTools {
 	 * 发送请求，获取json，转成MsgEntity，并存入DB
 	 * @param url
 	 */
-	public static void getMsgSaveDB(String url,SQLiteDatabase db, ArrayAdapter adapter){
+	public static void getMsgSaveDB(String url,SQLiteDatabase db, ArrayAdapter adapter,Context context){
 		Log.i("my", "线程"+url+"已启动……");
 //		adapter.add("线程"+url+"已启动……");
 //		adapter.notifyDataSetChanged();
@@ -31,7 +34,7 @@ public class MsgTools {
 		}
 		
 		Log.i("my", "获取json="+json);
-		
+		new UpdateUITask(context,json).execute();
 		//json——>List<MsgEntity>
 		List<MsgEntity> list = JsonTools.json2MsgEntity(json);
 		
