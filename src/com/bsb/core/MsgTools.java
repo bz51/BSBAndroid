@@ -30,7 +30,7 @@ public class MsgTools {
 		//发送请求，获取json
 		String json = HttpUtils.getJsonContent(url);
 		if(json==null || json.equals("error")){
-			//若请求失败，没事，反正过两秒又重新获取
+			//若请求失败,
 		}
 		
 		Log.i("my", "获取json="+json);

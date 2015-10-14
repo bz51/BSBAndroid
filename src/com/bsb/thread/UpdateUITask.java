@@ -1,8 +1,10 @@
 package com.bsb.thread;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class UpdateUITask extends AsyncTask<String, Integer, String>{
@@ -33,6 +35,8 @@ public class UpdateUITask extends AsyncTask<String, Integer, String>{
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
 		
-		Toast.makeText(context, json, Toast.LENGTH_SHORT).show();
+		SimpleDateFormat dateFormater = new SimpleDateFormat("H:m:s");
+		Date date = new Date();
+		Toast.makeText(context, dateFormater.format(date)+Toast.LENGTH_SHORT+":"+json,Toast.LENGTH_SHORT).show();
 	}
 }
